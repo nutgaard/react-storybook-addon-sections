@@ -38,7 +38,6 @@ HtmlView.propTypes = {
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-export default {
-    title: 'Html',
-    element: HtmlView
-};
+HtmlView.title = 'Html';
+
+export default HtmlView;

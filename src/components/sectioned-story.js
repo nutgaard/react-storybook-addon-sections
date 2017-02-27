@@ -36,13 +36,6 @@ class SectionedStory extends Component {
         const sectionElements = this.element && sections
                 .map((Section, i) => {
                     const sectionProps = { context, children, element, key: i };
-                    if (Object.prototype.hasOwnProperty.call(Section, 'element')) {
-                        return (
-                            <div key={Section.title} className="storybook-addons-info__section">
-                                {Section.element(sectionProps)}
-                            </div>
-                        );
-                    }
                     return <Section {...sectionProps} />;
                 });
 

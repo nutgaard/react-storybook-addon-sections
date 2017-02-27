@@ -128,7 +128,6 @@ ReactView.propTypes = {
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.noe)]).isRequired
 };
 
-export default {
-    title: 'React',
-    element: ReactView
-};
+ReactView.title = 'React';
+
+export default ReactView;

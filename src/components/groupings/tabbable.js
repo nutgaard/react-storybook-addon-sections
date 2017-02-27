@@ -1,4 +1,5 @@
-import React, { createElement, Component } from 'react';
+import React, { Component } from 'react';
+import { getTitle } from './utils';
 import './tabbable.css';
 
 function tabcontainer(...sections) {
@@ -6,7 +7,7 @@ function tabcontainer(...sections) {
         constructor(props) {
             super(props);
 
-            this.state = { active: sections[0].title };
+            this.state = { active: getTitle(sections[0]) };
             this.handleClick = this.handleClick.bind(this);
         }
 
@@ -18,16 +19,17 @@ function tabcontainer(...sections) {
 
         render() {
             const { ...props } = this.props;
-            const activeSection = sections.find((section) => section.title === this.state.active);
+            const ActiveSection = sections.find((section) => getTitle(section) === this.state.active);
 
             const buttons = sections
                 .map((section) => {
-                    const cls = ['storybook-addons-info__tabbable-button', section === activeSection ? 'active' : '']
+                    const cls = ['storybook-addons-info__tabbable-button', section === ActiveSection ? 'active' : '']
                         .join(' ');
+                    const title = getTitle(section);
 
                     return (
-                        <button className={cls} onClick={this.handleClick(section.title)} key={section.title}>
-                            {section.title}
+                        <button className={cls} onClick={this.handleClick(title)} key={title}>
+                            {title}
                         </button>
                     );
                 });
@@ -36,7 +38,7 @@ function tabcontainer(...sections) {
                 <div className="storybook-addons-info__section storybook-addons-info__tabbable">
                     <div className="storybook-addons-info__tabbable-buttons">{buttons}</div>
                     <div className="storybook-addons-info__tabbable-content">
-                        {createElement(activeSection.element, props)}
+                        <ActiveSection {...props} />
                     </div>
                 </div>
             );

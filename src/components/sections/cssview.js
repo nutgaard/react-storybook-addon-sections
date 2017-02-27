@@ -18,8 +18,6 @@ Cssview.propTypes = {
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
+Cssview.title = 'Css';
 
-export default {
-    title: 'Css',
-    element: Cssview
-};
+export default Cssview;
