@@ -1,0 +1,6 @@
+.mybtn {
+    background-color: red;
+}
+.mybtn.extra {
+    background-color: purple;
+}
