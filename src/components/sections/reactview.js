@@ -38,7 +38,7 @@ function propvalue(value) {
         return `={<${value.type.displayName || value.type.name || value.type} />}`;
     }
 
-    const str = value.stringify(value);
+    const str = JSON.stringify(value);
     if (str.length > 50) {
         return `=${str.slice(0, 45)}…}"`;
     }

@@ -45,7 +45,12 @@ storiesOf('Button')
     ), ReactView, HtmlView, CssView)
     .addWithSections('Combination section', () => (
         <Button>Simple</Button>
-    ), CssView, Inline(CssView), Tabbable(ReactView, HtmlView), Collapsable(ReactView, HtmlView));
+    ), CssView, Inline(CssView), Tabbable(ReactView, HtmlView), Collapsable(ReactView, HtmlView))
+    .addWithSections('Props', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Tabbable(ReactView, HtmlView));
 
 // --- Nothing ---
 // ReactView, HtmlView, CssView
