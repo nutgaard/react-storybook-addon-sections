@@ -50,14 +50,21 @@ storiesOf('Button')
         <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
             <Button>Simple</Button>
         </div>
-    ), Tabbable(ReactView, HtmlView));
-
-// --- Nothing ---
-// ReactView, HtmlView, CssView
-// ReactView
-// Inline(ReactView)
-// Inline(ReactView, HtmlView)
-// Inline(ReactView), Inline(HtmlView)
-// Collapsable(ReactView, HtmlView, CssView)
-// Tabbable(ReactView, HtmlView, CssView)
-// Inline(ReactView), Tabbable(HtmlView, CssView), Collapsable(AnotherView)
+    ), Tabbable(ReactView, HtmlView.withTitle('Min tittel')))
+    .addWithSections('Nested groups', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Tabbable(Collapsable(ReactView, HtmlView), Collapsable(CssView).withTitle('Styling')))
+    .addWithSections('Nested groups again', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Collapsable(Tabbable(ReactView, HtmlView).withTitle('Markup'), Tabbable(CssView).withTitle('Styling')))
+    .addWithSections('Deep nesting again', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView).withTitle('My header'))))),
+        Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header'))))),
+        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView).withTitle('My header'))))));

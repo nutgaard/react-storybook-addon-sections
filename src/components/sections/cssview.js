@@ -3,6 +3,7 @@ import Highlight from 'react-highlight';
 import cssbeautify from 'cssbeautify';
 import 'highlight.js/styles/github.css';
 import { getCssRulesForElementDeep } from './../utils';
+import titleHoc from './../title-hoc';
 
 function Cssview({ element }) {
     const css = cssbeautify(getCssRulesForElementDeep(element).join(' '));
@@ -18,6 +19,4 @@ Cssview.propTypes = {
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-Cssview.title = 'Css';
-
-export default Cssview;
+export default titleHoc('Css', Cssview);

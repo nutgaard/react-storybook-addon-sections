@@ -1,6 +1,7 @@
 import React, { PropTypes as PT, Children, isValidElement } from 'react';
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/github.css';
+import titleHoc from './../title-hoc';
 
 function chunk(maxSize = 3) {
     return (acc, item, index) => {
@@ -128,6 +129,4 @@ ReactView.propTypes = {
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.noe)]).isRequired
 };
 
-ReactView.title = 'React';
-
-export default ReactView;
+export default titleHoc('React', ReactView);

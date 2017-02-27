@@ -2,6 +2,7 @@
 import React, { PropTypes as PT } from 'react';
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/github.css';
+import titleHoc from './../title-hoc';
 
 function printHtml(element, padding = '') {
     if (element instanceof Text) {
@@ -38,6 +39,4 @@ HtmlView.propTypes = {
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-HtmlView.title = 'Html';
-
-export default HtmlView;
+export default titleHoc('Html', HtmlView);

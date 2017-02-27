@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTitle } from './utils';
 import './tabbable.css';
+import titleHoc from './../title-hoc';
 
 function tabcontainer(...sections) {
     class Tabbable extends Component {
@@ -28,7 +29,7 @@ function tabcontainer(...sections) {
                     const title = getTitle(section);
 
                     return (
-                        <button className={cls} onClick={this.handleClick(title)} key={title}>
+                        <button className={cls} onClick={this.handleClick(title)} key={`${title}`}>
                             {title}
                         </button>
                     );
@@ -44,7 +45,8 @@ function tabcontainer(...sections) {
             );
         }
     }
-    return Tabbable;
+
+    return titleHoc(sections.map((s) => getTitle(s)).join('&'), Tabbable);
 }
 
 export default tabcontainer;
