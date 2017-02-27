@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { action } from "@kadira/storybook";
+import { action } from '@kadira/storybook';
 import _SectionedStory from './components/sectioned-story';
 import _Htmlview from './components/sections/htmlview';
 
@@ -24,7 +24,7 @@ export default {
                 actionProxy(...args) {
                     const actionP = action(...args);
                     return (...args2) => {
-                        this.setState({ counter: this.state.counter +1 });
+                        this.setState({ counter: this.state.counter + 1 });
                         actionP(...args2);
                     };
                 }
@@ -37,7 +37,7 @@ export default {
                     );
                 }
             }
-            return (<SectionedStoryRefresher />)
+            return (<SectionedStoryRefresher />);
         });
     }
 };
