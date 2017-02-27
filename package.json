@@ -8,7 +8,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "prepublish": ". ./.scripts/prepublish.sh",
+    "prepublish": "rimraf ./dist && npm run build",
+    "js:build": "babel --ignore tests,stories --plugins \"transform-runtime\" ./src --out-dir ./dist",
+    "html:build": "copyfiles -u 1 'src/**/*.css' dist/",
+    "build": "npm run js:build && npm run html:build",
     "lint": "eslint src",
     "lintfix": "eslint src --fix",
     "testonly": "mocha --require .scripts/mocha_runner src/**/tests/**/*.js",
@@ -51,6 +54,7 @@
     "react-height": "^2.2.0",
     "react-highlight": "^0.9.0",
     "react-motion": "^0.4.7",
+    "rimraf": "^2.6.1",
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1"
   },
