@@ -9,9 +9,11 @@ import ReactView from '../src/components/sections/reactview';
 import CssView from '../src/components/sections/cssview';
 
 storiesOf('Button')
-    .addWithSections('Global sections', () => (
-        <Button>Simple</Button>
-    ))
+    .addWithSections('Global sections', (context, action) => {
+        return (
+            <Button onClick={action('global click')}>Simple</Button>
+        )
+    })
     .addWithSections('Single section', () => (
         <Button>Simple</Button>
     ), ReactView)
@@ -36,7 +38,7 @@ storiesOf('Button')
     .addWithSections('Even more multiple tabbable section', () => (
         <Button>Simple</Button>
     ), Tabbable(ReactView, HtmlView, CssView))
-    .addWithSections('Multiple sections', () => (
+    .addWithSections('Multiple sections', (_, action) => (
         <div className="classNavn" disabled>
             <Button onClick={action('btn')}>
                 Sections Test Skjer a?
