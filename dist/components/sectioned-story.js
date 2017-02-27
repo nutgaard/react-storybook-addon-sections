@@ -85,7 +85,7 @@ var SectionedStory = function (_Component) {
                 if (Object.prototype.hasOwnProperty.call(Section, 'element')) {
                     return _react2.default.createElement(
                         'div',
-                        { key: element.title, className: 'storybook-addons-info__section' },
+                        { key: Section.title, className: 'storybook-addons-info__section' },
                         Section.element(sectionProps)
                     );
                 }

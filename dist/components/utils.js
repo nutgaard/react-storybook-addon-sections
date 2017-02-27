@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _from = require('babel-runtime/core-js/array/from');
-
-var _from2 = _interopRequireDefault(_from);
-
 var _set = require('babel-runtime/core-js/set');
 
 var _set2 = _interopRequireDefault(_set);
+
+var _from = require('babel-runtime/core-js/array/from');
+
+var _from2 = _interopRequireDefault(_from);
 
 exports.prepMarkdown = prepMarkdown;
 exports.getCssRulesForElement = getCssRulesForElement;
@@ -47,9 +47,9 @@ function getCssRulesForElement(element) {
     // eslint-disable-next-line no-param-reassign
     element.matches = element.matches || element.webkitMatchesSelector || element.mozMatchesSelector || element.msMatchesSelector || element.oMatchesSelector;
 
-    sheets.forEach(function (sheet) {
+    (0, _from2.default)(sheets).forEach(function (sheet) {
         var rules = sheet.rules || sheet.cssRules;
-        rules.forEach(function (rule) {
+        (0, _from2.default)(rules).forEach(function (rule) {
             if (element.matches(rule.selectorText)) {
                 elementrules.push(rule.cssText);
             }
