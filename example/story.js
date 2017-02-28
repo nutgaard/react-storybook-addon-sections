@@ -37,7 +37,7 @@ storiesOf('Button')
     ), Tabbable(ReactView, HtmlView), Tabbable(ReactView, HtmlView))
     .addWithSections('Even more multiple tabbable section', () => (
         <Button>Simple</Button>
-    ), Tabbable(ReactView, HtmlView, CssView))
+    ), Tabbable(ReactView.withTitle('JSX'), HtmlView, CssView))
     .addWithSections('Multiple sections', (_, action) => (
         <div className="classNavn" disabled>
             <Button onClick={action('btn')}>
@@ -57,7 +57,7 @@ storiesOf('Button')
         <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
             <Button>Simple</Button>
         </div>
-    ), Tabbable(Collapsable(ReactView, HtmlView), Collapsable(CssView).withTitle('Styling')))
+    ), Tabbable(Collapsable(ReactView, HtmlView).withTitle('Markup'), Collapsable(CssView).withTitle('Styling')))
     .addWithSections('Nested groups again', () => (
         <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
             <Button>Simple</Button>
@@ -67,6 +67,6 @@ storiesOf('Button')
         <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
             <Button>Simple</Button>
         </div>
-    ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView).withTitle('My header'))))),
-        Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header'))))),
-        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView).withTitle('My header'))))));
+    ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
+        Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header')).withTitle('tabbable')).withTitle('collapsable'))),
+        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')));
