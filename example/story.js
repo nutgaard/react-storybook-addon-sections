@@ -7,6 +7,7 @@ import Tabbable from '../src/components/groupings/tabbable';
 import HtmlView from '../src/components/sections/htmlview';
 import ReactView from '../src/components/sections/reactview';
 import CssView from '../src/components/sections/cssview';
+import Group from '../src/components/groupings/group';
 
 storiesOf('Button')
     .addWithSections('Global sections', (context, action) => {
@@ -69,4 +70,9 @@ storiesOf('Button')
         </div>
     ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
         Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header')).withTitle('tabbable')).withTitle('collapsable'))),
-        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')));
+        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')))
+    .addWithSections('Pure grouping', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Collapsable(ReactView, HtmlView), Collapsable(Group(ReactView, HtmlView).withTitle('custom title')));
