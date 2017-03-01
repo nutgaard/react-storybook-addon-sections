@@ -1,6 +1,9 @@
 .storybook-addons-info__collapsable {
     display: flex;
     flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
 }
 .collapsable__btn {
     background: none;
@@ -8,8 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
-    margin: 0 -1rem;
+    padding: 1rem;
 }
 .collapsable__btntitle {
     margin: 0;
@@ -18,7 +20,7 @@
 
 }
 .collapsable__content {
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 1rem;
 }
 .collapsable__content > *:first-child {
     margin-top: 0;
