@@ -1,6 +1,6 @@
 {
   "name": "react-storybook-addon-sections",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A React Storybook addon to show additional information for your stories using predefined sections.",
   "repository": {
     "type": "git",
