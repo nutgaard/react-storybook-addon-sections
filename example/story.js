@@ -7,7 +7,10 @@ import Tabbable from '../src/components/groupings/tabbable';
 import HtmlView from '../src/components/sections/htmlview';
 import ReactView from '../src/components/sections/reactview';
 import CssView from '../src/components/sections/cssview';
+import Rawview from '../src/components/sections/rawview';
 import Group from '../src/components/groupings/group';
+
+import buttonSrc from '!!raw-loader!./button.js';
 
 storiesOf('Button')
     .addWithSections('Global sections', (context, action) => {
@@ -75,4 +78,9 @@ storiesOf('Button')
         <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
             <Button>Simple</Button>
         </div>
-    ), Collapsable(ReactView, HtmlView), Collapsable(Group(ReactView, HtmlView).withTitle('custom title')));
+    ), Collapsable(ReactView, HtmlView), Collapsable(Group(ReactView, HtmlView).withTitle('custom title')))
+    .addWithSections('Raw view', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Tabbable(Rawview(buttonSrc, 'javascript').withTitle('Button')));
