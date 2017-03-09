@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+}
+button {
+    background-color: antiquewhite;
+}
 .mybtn {
     background-color: red;
 }

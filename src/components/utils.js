@@ -1,4 +1,6 @@
 /* eslint-env browser */
+import specificity from 'specificity';
+
 export function prepMarkdown(str) {
     const lines = str.split('\n');
 
@@ -18,7 +20,7 @@ export function prepMarkdown(str) {
     return lines.map((s) => s.slice(padding)).join('\n');
 }
 
-export function getCssRulesForElement(element) {
+export function getCssRulesForElement(element, minThreshold) {
     const sheets = document.styleSheets;
     const elementrules = [];
 
@@ -31,7 +33,9 @@ export function getCssRulesForElement(element) {
 
     Array.from(sheets).forEach((sheet) => {
         const rules = sheet.rules || sheet.cssRules;
-        Array.from(rules).forEach((rule) => {
+        Array.from(rules)
+            .filter((rule) => calculateSpecificity(rule.selectorText, minThreshold))
+            .forEach((rule) => {
             if (element.matches(rule.selectorText)) {
                 elementrules.push(rule.cssText);
             }
@@ -41,14 +45,20 @@ export function getCssRulesForElement(element) {
     return elementrules;
 }
 
-export function getCssRulesForElementDeep(element) {
+export function getCssRulesForElementDeep(element, minThreshold) {
     const set = new Set();
-    getCssRulesForElement(element)
+    getCssRulesForElement(element, minThreshold)
         .forEach((rule) => set.add(rule));
 
     Array.from(element.querySelectorAll('*'))
-        .map(getCssRulesForElement)
+        .map((e) => getCssRulesForElement(e, minThreshold))
         .forEach((rules) => rules.forEach((rule) => set.add(rule)));
 
     return Array.from(set);
+}
+
+function calculateSpecificity(selector, minThreshold) {
+    return !!specificity.calculate(selector)
+        .map((r) => parseInt(r.specificity.replace(/,/g, ''), 10))
+        .find((r) => r >= minThreshold);
 }

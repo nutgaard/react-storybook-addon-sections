@@ -1,7 +1,7 @@
-import React, { PropTypes as PT, Children, isValidElement } from 'react';
-import Highlight from 'react-highlight';
-import 'highlight.js/styles/github.css';
-import titleHoc from './../title-hoc';
+import React, { PropTypes as PT, Children, isValidElement } from "react";
+import Highlight from "react-highlight";
+import "highlight.js/styles/github.css";
+import titleHoc from "./../title-hoc";
 
 function chunk(maxSize = 3) {
     return (acc, item, index) => {
@@ -115,9 +115,25 @@ function printReact(node, padding = '') {
     return `${startTag}\n${childrenStr}\n${endTag}`;
 }
 
+function arr(val) {
+    return Array.isArray(val) ? val : [val];
+}
 
-function ReactView({ children }) {
-    const nChildren = Array.from(Children.map(children, (child) => printReact(child))).join('\n\n');
+function peelElement(element, peel, prop) {
+    if (peel === 0) {
+        return arr(element);
+    }
+
+    return arr(element)
+        .reduce((output, el) => {
+            const peeled = peelElement(arr(el.props.children), peel - 1);
+            return [...output, ...peeled];
+        }, []);
+}
+
+export function ReactViewElement({ children, peel, ...props }) {
+    const peeledChildren = peelElement(Children.toArray(children), peel, 'children');
+    const nChildren = peeledChildren.map((child) => printReact(child)).join('\n\n');
     return (
         <Highlight className="html">
             {nChildren}
@@ -125,8 +141,13 @@ function ReactView({ children }) {
     );
 }
 
-ReactView.propTypes = {
+ReactViewElement.defaultProps = {
+    peel: 0
+};
+
+ReactViewElement.propTypes = {
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.noe)]).isRequired
 };
 
-export default titleHoc('React', ReactView);
+
+export default titleHoc('React', ReactViewElement);

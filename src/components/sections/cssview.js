@@ -5,8 +5,11 @@ import 'highlight.js/styles/github.css';
 import { getCssRulesForElementDeep } from './../utils';
 import titleHoc from './../title-hoc';
 
-function Cssview({ element }) {
-    const css = cssbeautify(getCssRulesForElementDeep(element).join(' '));
+
+
+export function CssviewElement({ element, specificity }) {
+    console.log(`specificity`, specificity);
+    const css = cssbeautify(getCssRulesForElementDeep(element, specificity).join(' '));
 
     return (
         <Highlight className="css">
@@ -15,8 +18,12 @@ function Cssview({ element }) {
     );
 }
 
-Cssview.propTypes = {
-    element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
+CssviewElement.defaultProps = {
+    specificity: 0
+};
+CssviewElement.propTypes = {
+    element: PT.any.isRequired, // eslint-disable-line react/forbid-prop-types
+    specificity: PT.number
 };
 
-export default titleHoc('Css', Cssview);
+export default titleHoc('Css', CssviewElement);

@@ -27,16 +27,35 @@ function printHtml(element, padding = '') {
     return `${startTag}\n${children}\n${endTag}`;
 }
 
-function HtmlView({ element }) {
+function arr(val) {
+    return Array.isArray(val) ? val : [ val ];
+}
+
+function peelElement(element, peel, prop) {
+    if (peel === 0) {
+        return arr(element);
+    }
+
+    return arr(element)
+        .reduce((output, el) => [...output, ...peelElement(Array.from(el[prop]), peel - 1, prop)], []);
+}
+
+export function HtmlViewElement({ element, peel }) {
+    const peeledElement = peelElement(element, peel, 'children');
+
     return (
         <Highlight className="html">
-            {printHtml(element)}
+            {peeledElement.map((el) => printHtml(el)).join('\n\n')}
         </Highlight>
     );
 }
 
-HtmlView.propTypes = {
+HtmlViewElement.defaultProps = {
+    peel: 0
+};
+
+HtmlViewElement.propTypes = {
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-export default titleHoc('Html', HtmlView);
+export default titleHoc('Html', HtmlViewElement);

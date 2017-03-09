@@ -1,12 +1,23 @@
 import React from "react";
 import Button from "./button";
-import { storiesOf, action } from "@kadira/storybook";
-import Inline from '../src/components/groupings/inline';
-import Collapsable from '../src/components/groupings/collapsable';
-import Tabbable from '../src/components/groupings/tabbable';
-import HtmlView from '../src/components/sections/htmlview';
-import ReactView from '../src/components/sections/reactview';
-import CssView from '../src/components/sections/cssview';
+import { storiesOf } from "@kadira/storybook";
+import Inline, { InlineElement } from "../src/components/groupings/inline";
+import Collapsable from "../src/components/groupings/collapsable";
+import Tabbable from "../src/components/groupings/tabbable";
+import HtmlView, { HtmlViewElement } from "../src/components/sections/htmlview";
+import ReactView, { ReactViewElement } from "../src/components/sections/reactview";
+import CssView, { CssviewElement } from "../src/components/sections/cssview";
+
+function test({ children, element }) {
+    return (
+        <InlineElement title="test">
+            <h1>Mer</h1>
+            <ReactViewElement children={children} peel={3} />
+            <HtmlViewElement element={element} peel={3} />
+            <CssviewElement element={element} specificity={10} />
+        </InlineElement>
+    );
+}
 
 storiesOf('Button')
     .addWithSections('Global sections', (context, action) => {
@@ -23,6 +34,26 @@ storiesOf('Button')
     .addWithSections('Multiple inline section', () => (
         <Button>Simple</Button>
     ), Inline(ReactView, HtmlView))
+    .addWithSections('Peeling wrapper divs', () => (
+        <div className="wrap1">
+            <div className="wrap2">
+                <div className="wrap3">
+                    <Button>Simple</Button>
+                </div>
+                <div className="wrap3">
+                    <Button>Simple</Button>
+                </div>
+                <div className="wrap3">
+                    <Button>Simple</Button>
+                </div>
+            </div>
+        </div>
+    ), test)
+    .addWithSections('Peeling wrapper divs2', () => (
+        <div>
+            <Button>Simple</Button>
+        </div>
+    ), (...props) => <InlineElement title="test"><h1>Jeye</h1></InlineElement>)
     .addWithSections('Single collapsable section', () => (
         <Button>Simple</Button>
     ), Collapsable(ReactView))
@@ -64,9 +95,9 @@ storiesOf('Button')
         </div>
     ), Collapsable(Tabbable(ReactView, HtmlView).withTitle('Markup'), Tabbable(CssView).withTitle('Styling')))
     .addWithSections('Deep nesting again', () => (
-        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
-            <Button>Simple</Button>
-        </div>
-    ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
+            <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+                <Button>Simple</Button>
+            </div>
+        ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
         Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header')).withTitle('tabbable')).withTitle('collapsable'))),
         Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')));
