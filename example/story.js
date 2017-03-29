@@ -17,6 +17,8 @@ storiesOf('Button')
     .addWithSections('No leaking styles', () => (
         <div>
             <h1>Should not be styled</h1>
+            <p>Nor this</p>
+            <span>or this</span>
         </div>
     ))
     .addWithSections('Global sections', (context, action) => {
