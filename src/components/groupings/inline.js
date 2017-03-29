@@ -1,10 +1,11 @@
 import React, { PropTypes as PT } from 'react';
 import { factory } from './utils';
+import { classNames } from './../utils';
 
 function InlineElement({ title, children }) {
     return (
-        <div className="storybook-addons-info__section">
-            <h2>{title}</h2>
+        <div className={classNames('section')}>
+            <h2 className={classNames('heading')}>{title}</h2>
             { children }
         </div>
     );

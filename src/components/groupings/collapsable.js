@@ -2,6 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import Collapse from 'react-collapse';
 import './collapsable.css';
 import { factory } from './utils';
+import { classNames } from './../utils';
 
 class Collapsable extends Component {
     constructor(props) {
@@ -23,13 +24,13 @@ class Collapsable extends Component {
         const { title, children } = this.props;
         const openBtn = this.state.open ? 'Close' : 'Open';
         return (
-            <div className="storybook-addons-info__section storybook-addons-info__collapsable">
-                <button className="collapsable__btn" onClick={this.handleClick}>
-                    <h2 className="collapsable__btntitle">{title}</h2>
-                    <span className="collapsable__btnicon">{openBtn}</span>
+            <div className={classNames('section', 'collapsable')}>
+                <button className={classNames('collapsable__btn')} onClick={this.handleClick}>
+                    <h2 className={classNames('collapsable__btntitle')}>{title}</h2>
+                    <span className={classNames('collapsable__btnicon')}>{openBtn}</span>
                 </button>
                 <Collapse isOpened={this.state.open}>
-                    <div className="collapsable__content">
+                    <div className={classNames('collapsable__content')}>
                         {children}
                     </div>
                 </Collapse>

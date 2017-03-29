@@ -1,9 +1,9 @@
-.storybook-addons-info__tabbable-buttons {
+.storybook-addons-sections__tabbable-buttons {
     display: flex;
     justify-content: space-between;
 }
 
-.storybook-addons-info__tabbable-button {
+.storybook-addons-sections__tabbable-button {
     flex: auto;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -13,16 +13,16 @@
     background: #efefef none;
 
 }
-.storybook-addons-info__tabbable-button.active {
+.storybook-addons-sections__tabbable-button.storybook-addons-sections__tabbable--active {
     border-bottom: 0;
     background-color: white;
     font-weight: 600;
 }
-.storybook-addons-info__tabbable-content {
+.storybook-addons-sections__tabbable-content {
     border: 1px solid #ccc;
     padding: 1rem;
     border-top: 0;
 }
-.storybook-addons-info__tabbable-content > *:first-child {
+.storybook-addons-sections__tabbable-content > *:first-child {
     margin-top: 0;
 }

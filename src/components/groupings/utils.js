@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 import titleHoc from './../title-hoc';
+import { classNames } from './../utils';
 
 export function getTitle(component) {
     return (
@@ -20,7 +21,7 @@ export function factory(SectionImpl) {
                 </SectionImpl>
             ));
 
-            return <div className="storybook-addons-info__factory">{sectionElements}</div>;
+            return <div className={classNames('factory')}>{sectionElements}</div>;
         };
 
         return titleHoc(sections.map((s) => getTitle(s)).join(' & '), Renderer);

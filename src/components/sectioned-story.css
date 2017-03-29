@@ -1,30 +1,25 @@
-.storybook-addons-info {
+.storybook-addons-sections {
     font-family: -apple-system, ".SFNSText-Regular", "San Francisco", Roboto, "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
     color: rgb(68, 68, 68);
     -webkit-font-smoothing: antialiased;
 }
-.storybook-addons-info__context-kind {
+.storybook-addons-sections__context-kind {
     font-size: 1.5rem;
 }
-.storybook-addons-info__context-story {
+.storybook-addons-sections__context-story {
     font-size: 1rem;
     font-weight: 200;
     color: rgb(168, 168, 168);
 }
-.storybook-addons-info h1,
-.storybook-addons-info h2,
-.storybook-addons-info h3,
-.storybook-addons-info h4,
-.storybook-addons-info h5,
-.storybook-addons-info h6 {
+.storybook-addons-sections__heading {
     margin-top: 0;
 }
-.storybook-addons-info__section {
+.storybook-addons-sections__section {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(238, 238, 238);
 }
-.storybook-addons-info__infoheader h1,
-.storybook-addons-info__infoheader p {
+.storybook-addons-sections__infoheader h1,
+.storybook-addons-sections__infoheader p {
     margin: 0;
 }

@@ -1,6 +1,14 @@
 /* eslint-env browser */
 import specificity from 'specificity';
 
+export const clsBase = 'storybook-addons-sections';
+
+export function classNames(...cls) {
+    return cls
+        .filter((cl) => cl && cl.length > 0)
+        .map((cl) => `${clsBase}__${cl}`).join(' ');
+}
+
 function calculateSpecificity(selector, minThreshold) {
     return !!specificity.calculate(selector)
         .map((r) => parseInt(r.specificity.replace(/,/g, ''), 10))
