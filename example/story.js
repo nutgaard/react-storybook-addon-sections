@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./button";
 import { storiesOf } from "@kadira/storybook";
-import Inline, { InlineElement } from "../src/components/groupings/inline";
+import Inline from "../src/components/groupings/inline";
 import Collapsable from "../src/components/groupings/collapsable";
 import Tabbable from "../src/components/groupings/tabbable";
 import HtmlView from "../src/components/sections/htmlview";
