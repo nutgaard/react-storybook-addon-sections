@@ -7,8 +7,7 @@ import titleHoc from './../title-hoc';
 
 
 
-export function CssviewElement({ element, specificity }) {
-    console.log(`specificity`, specificity);
+function Cssview({ element, specificity }) {
     const css = cssbeautify(getCssRulesForElementDeep(element, specificity).join(' '));
 
     return (
@@ -18,12 +17,12 @@ export function CssviewElement({ element, specificity }) {
     );
 }
 
-CssviewElement.defaultProps = {
+Cssview.defaultProps = {
     specificity: 0
 };
-CssviewElement.propTypes = {
+Cssview.propTypes = {
     element: PT.any.isRequired, // eslint-disable-line react/forbid-prop-types
     specificity: PT.number
 };
 
-export default titleHoc('Css', CssviewElement);
+export default titleHoc('Css', Cssview);

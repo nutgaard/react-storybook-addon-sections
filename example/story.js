@@ -4,25 +4,14 @@ import { storiesOf } from "@kadira/storybook";
 import Inline, { InlineElement } from "../src/components/groupings/inline";
 import Collapsable from "../src/components/groupings/collapsable";
 import Tabbable from "../src/components/groupings/tabbable";
-import HtmlView, { HtmlViewElement } from "../src/components/sections/htmlview";
-import ReactView, { ReactViewElement } from "../src/components/sections/reactview";
-import CssView, { CssviewElement } from "../src/components/sections/cssview";
+import HtmlView from "../src/components/sections/htmlview";
+import ReactView from "../src/components/sections/reactview";
+import CssView from "../src/components/sections/cssview";
 
 import Rawview from '../src/components/sections/rawview';
 import Group from '../src/components/groupings/group';
 
 import buttonSrc from '!!raw-loader!./button.js';
-
-function test({ children, element }) {
-    return (
-        <InlineElement title="test">
-            <h1>Mer</h1>
-            <ReactViewElement children={children} peel={3} />
-            <HtmlViewElement element={element} peel={3} />
-            <CssviewElement element={element} specificity={10} />
-        </InlineElement>
-    );
-}
 
 storiesOf('Button')
     .addWithSections('Global sections', (context, action) => {
@@ -53,12 +42,7 @@ storiesOf('Button')
                 </div>
             </div>
         </div>
-    ), test)
-    .addWithSections('Peeling wrapper divs2', () => (
-        <div>
-            <Button>Simple</Button>
-        </div>
-    ), (...props) => <InlineElement title="test"><h1>Jeye</h1></InlineElement>)
+    ), Inline(Group(ReactView.withProps({peel: 3}), HtmlView.withProps({ peel: 3 }), CssView.withProps({specificity: 15})).withTitle('Test')))
     .addWithSections('Single collapsable section', () => (
         <Button>Simple</Button>
     ), Collapsable(ReactView))

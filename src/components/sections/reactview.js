@@ -131,7 +131,7 @@ function peelElement(element, peel, prop) {
         }, []);
 }
 
-export function ReactViewElement({ children, peel, ...props }) {
+function ReactView({ children, peel }) {
     const peeledChildren = peelElement(Children.toArray(children), peel, 'children');
     const nChildren = peeledChildren.map((child) => printReact(child)).join('\n\n');
     return (
@@ -141,13 +141,12 @@ export function ReactViewElement({ children, peel, ...props }) {
     );
 }
 
-ReactViewElement.defaultProps = {
+ReactView.defaultProps = {
     peel: 0
 };
 
-ReactViewElement.propTypes = {
+ReactView.propTypes = {
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.noe)]).isRequired
 };
 
-
-export default titleHoc('React', ReactViewElement);
+export default titleHoc('React', ReactView);

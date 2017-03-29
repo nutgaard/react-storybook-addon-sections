@@ -40,7 +40,7 @@ function peelElement(element, peel, prop) {
         .reduce((output, el) => [...output, ...peelElement(Array.from(el[prop]), peel - 1, prop)], []);
 }
 
-export function HtmlViewElement({ element, peel }) {
+function HtmlView({ element, peel }) {
     const peeledElement = peelElement(element, peel, 'children');
 
     return (
@@ -50,12 +50,12 @@ export function HtmlViewElement({ element, peel }) {
     );
 }
 
-HtmlViewElement.defaultProps = {
+HtmlView.defaultProps = {
     peel: 0
 };
 
-HtmlViewElement.propTypes = {
+HtmlView.propTypes = {
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-export default titleHoc('Html', HtmlViewElement);
+export default titleHoc('Html', HtmlView);

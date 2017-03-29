@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { factory } from './utils';
 
-export function InlineElement({ title, children }) {
+function InlineElement({ title, children }) {
     return (
         <div className="storybook-addons-info__section">
             <h2>{title}</h2>
