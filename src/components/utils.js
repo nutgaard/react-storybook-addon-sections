@@ -1,23 +1,12 @@
 /* eslint-env browser */
 import specificity from 'specificity';
 
-export function prepMarkdown(str) {
-    const lines = str.split('\n');
+export const clsBase = 'storybook-addons-sections';
 
-    // Removing empty lines at start of str
-    while (lines[0].trim() === '') {
-        lines.shift();
-    }
-
-    // Finding det starting padding-level
-    let padding = 0;
-    const matches = lines[0].match(/^ */);
-    if (matches) {
-        padding = matches[0].length;
-    }
-
-    // Removing starting padding-level from all lines
-    return lines.map((s) => s.slice(padding)).join('\n');
+export function classNames(...cls) {
+    return cls
+        .filter((cl) => cl && cl.length > 0)
+        .map((cl) => `${clsBase}__${cl}`).join(' ');
 }
 
 function calculateSpecificity(selector, minThreshold) {

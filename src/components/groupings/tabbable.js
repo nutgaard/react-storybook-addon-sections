@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getTitle } from './utils';
 import './tabbable.css';
 import titleHoc from './../title-hoc';
+import { classNames } from './../utils';
 
 function tabcontainer(...sections) {
     class Tabbable extends Component {
@@ -24,8 +25,7 @@ function tabcontainer(...sections) {
 
             const buttons = sections
                 .map((section) => {
-                    const cls = ['storybook-addons-info__tabbable-button', section === ActiveSection ? 'active' : '']
-                        .join(' ');
+                    const cls = classNames('tabbable-button', section === ActiveSection ? 'tabbable--active' : '');
                     const title = getTitle(section);
 
                     return (
@@ -36,9 +36,9 @@ function tabcontainer(...sections) {
                 });
 
             return (
-                <div className="storybook-addons-info__section storybook-addons-info__tabbable">
-                    <div className="storybook-addons-info__tabbable-buttons">{buttons}</div>
-                    <div className="storybook-addons-info__tabbable-content">
+                <div className={classNames('section', 'tabbable')}>
+                    <div className={classNames('tabbable-buttons')}>{buttons}</div>
+                    <div className={classNames('tabbable-content')}>
                         <ActiveSection {...props} />
                     </div>
                 </div>

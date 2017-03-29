@@ -1,11 +1,11 @@
-.storybook-addons-info__collapsable {
+.storybook-addons-sections__collapsable {
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 0;
 }
-.collapsable__btn {
+.storybook-addons-sections__collapsable__btn {
     background: none;
     border: none;
     display: flex;
@@ -13,18 +13,18 @@
     align-items: center;
     padding: 1rem;
 }
-.collapsable__btntitle {
+.storybook-addons-sections__collapsable__btntitle {
     margin: 0;
 }
-.collapsable__btnicon {
+.storybook-addons-sections__collapsable__btnicon {
 
 }
-.collapsable__content {
+.storybook-addons-sections__collapsable__content {
     padding: 0.5rem 1rem;
 }
-.collapsable__content > *:first-child {
+.storybook-addons-sections__collapsable__content > *:first-child {
     margin-top: 0;
 }
-.collapsable__content > *:last-child {
+.storybook-addons-sections__collapsable__content > *:last-child {
     margin-bottom: 0;
 }

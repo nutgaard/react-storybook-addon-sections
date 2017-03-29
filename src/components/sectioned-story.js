@@ -1,5 +1,6 @@
 import { render } from 'react-dom';
 import React, { Component, PropTypes as PT } from 'react';
+import { clsBase, classNames } from './utils';
 import './sectioned-story.css';
 
 class SectionedStory extends Component {
@@ -39,25 +40,22 @@ class SectionedStory extends Component {
                     return <Section {...sectionProps} />;
                 });
 
-        render(<div className="storybook-addons-info__portal">{sectionElements}</div>, this.sectionWrapper);
+        render(<div className={classNames('portal')}>{sectionElements}</div>, this.sectionWrapper);
     }
 
     render() {
         const { context, children } = this.props;
 
         return (
-            <div className="storybook-addons-info">
-                <div className="storybook-addons-info__section storybook-addons-info__infoheader">
-                    <h1 className="storybook-addons-info__context-kind">{context.kind}</h1>
-                    <p className="storybook-addons-info__context-story">{context.story}</p>
+            <div className={clsBase}>
+                <div className={classNames('section', 'infoheader')}>
+                    <h1 className={classNames('context-kind')}>{context.kind}</h1>
+                    <p className={classNames('context-story')}>{context.story}</p>
                 </div>
-                <div
-                    className="storybook-addons-info__section storybook-addons-info__story"
-                    ref={this.setElement}
-                >
+                <div className={classNames('section', 'story')} ref={this.setElement}>
                     { children }
                 </div>
-                <div className="storybook-addons-info__portal-reference" ref={this.setSectionWrapper} />
+                <div className={classNames('portal-reference')} ref={this.setSectionWrapper} />
             </div>
         );
     }
