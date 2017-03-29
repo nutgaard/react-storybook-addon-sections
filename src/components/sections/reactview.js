@@ -1,7 +1,7 @@
-import React, { PropTypes as PT, Children, isValidElement } from "react";
-import Highlight from "react-highlight";
-import "highlight.js/styles/github.css";
-import titleHoc from "./../title-hoc";
+import React, { PropTypes as PT, Children, isValidElement } from 'react';
+import Highlight from 'react-highlight';
+import 'highlight.js/styles/github.css';
+import titleHoc from './../title-hoc';
 
 function chunk(maxSize = 3) {
     return (acc, item, index) => {
@@ -22,7 +22,7 @@ function propvalue(value) {
         return `={${value}}`;
     } else if (type === 'string') {
         if (value.length > 50) {
-            return `="${value.slice(0, 47)}…"`;
+            return `="${value.slice(0, 47)}…'`;
         }
         return `="${value}"`;
     } else if (type === 'boolean') {
@@ -119,7 +119,7 @@ function arr(val) {
     return Array.isArray(val) ? val : [val];
 }
 
-function peelElement(element, peel, prop) {
+function peelElement(element, peel) {
     if (peel === 0) {
         return arr(element);
     }
@@ -146,6 +146,7 @@ ReactView.defaultProps = {
 };
 
 ReactView.propTypes = {
+    peel: PT.number,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.noe)]).isRequired
 };
 

@@ -28,7 +28,7 @@ function printHtml(element, padding = '') {
 }
 
 function arr(val) {
-    return Array.isArray(val) ? val : [ val ];
+    return Array.isArray(val) ? val : [val];
 }
 
 function peelElement(element, peel, prop) {
@@ -55,6 +55,7 @@ HtmlView.defaultProps = {
 };
 
 HtmlView.propTypes = {
+    peel: PT.number,
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 

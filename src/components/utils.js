@@ -20,6 +20,12 @@ export function prepMarkdown(str) {
     return lines.map((s) => s.slice(padding)).join('\n');
 }
 
+function calculateSpecificity(selector, minThreshold) {
+    return !!specificity.calculate(selector)
+        .map((r) => parseInt(r.specificity.replace(/,/g, ''), 10))
+        .find((r) => r >= minThreshold);
+}
+
 export function getCssRulesForElement(element, minThreshold) {
     const sheets = document.styleSheets;
     const elementrules = [];
@@ -36,10 +42,10 @@ export function getCssRulesForElement(element, minThreshold) {
         Array.from(rules)
             .filter((rule) => calculateSpecificity(rule.selectorText, minThreshold))
             .forEach((rule) => {
-            if (element.matches(rule.selectorText)) {
-                elementrules.push(rule.cssText);
-            }
-        });
+                if (element.matches(rule.selectorText)) {
+                    elementrules.push(rule.cssText);
+                }
+            });
     });
 
     return elementrules;
@@ -55,10 +61,4 @@ export function getCssRulesForElementDeep(element, minThreshold) {
         .forEach((rules) => rules.forEach((rule) => set.add(rule)));
 
     return Array.from(set);
-}
-
-function calculateSpecificity(selector, minThreshold) {
-    return !!specificity.calculate(selector)
-        .map((r) => parseInt(r.specificity.replace(/,/g, ''), 10))
-        .find((r) => r >= minThreshold);
 }

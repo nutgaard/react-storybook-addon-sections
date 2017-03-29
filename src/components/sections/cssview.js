@@ -5,8 +5,6 @@ import 'highlight.js/styles/github.css';
 import { getCssRulesForElementDeep } from './../utils';
 import titleHoc from './../title-hoc';
 
-
-
 function Cssview({ element, specificity }) {
     const css = cssbeautify(getCssRulesForElementDeep(element, specificity).join(' '));
 
