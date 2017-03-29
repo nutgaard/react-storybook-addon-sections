@@ -18,7 +18,7 @@
     "test": "yarn run lint && yarn run testonly",
     "storybook": "start-storybook -p 9010",
     "build-storybook": "build-storybook -o .out",
-    "publish-storybook": "yarn run build-storybook && gh-pages -d .out"
+    "publish-storybook": "yarn run build-storybook && gh-pages -d .out && rimraf ./.out"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.20.1",
