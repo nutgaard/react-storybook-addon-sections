@@ -20,16 +20,9 @@
     margin-top: 0;
 }
 .storybook-addons-info__section {
-    padding: 0 1rem;
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(238, 238, 238);
-}
-.storybook-addons-info__factory:last-child .storybook-addons-info__section:last-child {
-    border-bottom: none;
-}
-.storybook-addons-info__portal > .storybook-addons-info__section:last-child {
-    border-bottom: none;
 }
 .storybook-addons-info__infoheader h1,
 .storybook-addons-info__infoheader p {

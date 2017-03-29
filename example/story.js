@@ -8,6 +8,11 @@ import HtmlView, { HtmlViewElement } from "../src/components/sections/htmlview";
 import ReactView, { ReactViewElement } from "../src/components/sections/reactview";
 import CssView, { CssviewElement } from "../src/components/sections/cssview";
 
+import Rawview from '../src/components/sections/rawview';
+import Group from '../src/components/groupings/group';
+
+import buttonSrc from '!!raw-loader!./button.js';
+
 function test({ children, element }) {
     return (
         <InlineElement title="test">
@@ -100,4 +105,14 @@ storiesOf('Button')
             </div>
         ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
         Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header')).withTitle('tabbable')).withTitle('collapsable'))),
-        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')));
+        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')))
+    .addWithSections('Pure grouping', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Collapsable(ReactView, HtmlView), Collapsable(Group(ReactView, HtmlView).withTitle('custom title')))
+    .addWithSections('Raw view', () => (
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+    ), Tabbable(Rawview(buttonSrc, 'javascript').withTitle('Button')));
