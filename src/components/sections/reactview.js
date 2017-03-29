@@ -22,7 +22,7 @@ function propvalue(value) {
         return `={${value}}`;
     } else if (type === 'string') {
         if (value.length > 50) {
-            return `="${value.slice(0, 47)}…"`;
+            return `="${value.slice(0, 47)}…'`;
         }
         return `="${value}"`;
     } else if (type === 'boolean') {
@@ -115,9 +115,25 @@ function printReact(node, padding = '') {
     return `${startTag}\n${childrenStr}\n${endTag}`;
 }
 
+function arr(val) {
+    return Array.isArray(val) ? val : [val];
+}
 
-function ReactView({ children }) {
-    const nChildren = Array.from(Children.map(children, (child) => printReact(child))).join('\n\n');
+function peelElement(element, peel) {
+    if (peel === 0) {
+        return arr(element);
+    }
+
+    return arr(element)
+        .reduce((output, el) => {
+            const peeled = peelElement(arr(el.props.children), peel - 1);
+            return [...output, ...peeled];
+        }, []);
+}
+
+function ReactView({ children, peel }) {
+    const peeledChildren = peelElement(Children.toArray(children), peel, 'children');
+    const nChildren = peeledChildren.map((child) => printReact(child)).join('\n\n');
     return (
         <Highlight className="html">
             {nChildren}
@@ -125,7 +141,12 @@ function ReactView({ children }) {
     );
 }
 
+ReactView.defaultProps = {
+    peel: 0
+};
+
 ReactView.propTypes = {
+    peel: PT.number,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.noe)]).isRequired
 };
 

@@ -27,15 +27,35 @@ function printHtml(element, padding = '') {
     return `${startTag}\n${children}\n${endTag}`;
 }
 
-function HtmlView({ element }) {
+function arr(val) {
+    return Array.isArray(val) ? val : [val];
+}
+
+function peelElement(element, peel, prop) {
+    if (peel === 0) {
+        return arr(element);
+    }
+
+    return arr(element)
+        .reduce((output, el) => [...output, ...peelElement(Array.from(el[prop]), peel - 1, prop)], []);
+}
+
+function HtmlView({ element, peel }) {
+    const peeledElement = peelElement(element, peel, 'children');
+
     return (
         <Highlight className="html">
-            {printHtml(element)}
+            {peeledElement.map((el) => printHtml(el)).join('\n\n')}
         </Highlight>
     );
 }
 
+HtmlView.defaultProps = {
+    peel: 0
+};
+
 HtmlView.propTypes = {
+    peel: PT.number,
     element: PT.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
