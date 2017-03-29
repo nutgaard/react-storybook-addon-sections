@@ -1,4 +1,4 @@
-.storybook-addons-sections {
+.storybook-addons-sections__section:not(.storybook-addons-sections__story) {
     font-family: -apple-system, ".SFNSText-Regular", "San Francisco", Roboto, "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
     color: rgb(68, 68, 68);
     -webkit-font-smoothing: antialiased;
