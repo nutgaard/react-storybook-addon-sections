@@ -1,16 +1,16 @@
-import React from "react";
-import Button from "./button";
-import { storiesOf } from "@kadira/storybook";
-import Inline from "../src/components/groupings/inline";
-import Collapsable from "../src/components/groupings/collapsable";
-import Tabbable from "../src/components/groupings/tabbable";
-import HtmlView from "../src/components/sections/htmlview";
-import ReactView from "../src/components/sections/reactview";
-import CssView from "../src/components/sections/cssview";
+import React from 'react';
+import { storiesOf } from '@kadira/storybook';
+import Button from './button';
+import Inline from '../src/components/groupings/inline';
+import Collapsable from '../src/components/groupings/collapsable';
+import Tabbable from '../src/components/groupings/tabbable';
+import HtmlView from '../src/components/sections/htmlview';
+import ReactView from '../src/components/sections/reactview';
+import CssView from '../src/components/sections/cssview';
 
 import Rawview from '../src/components/sections/rawview';
 import Group from '../src/components/groupings/group';
-
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions
 import buttonSrc from '!!raw-loader!./button.js';
 
 storiesOf('Button')
@@ -21,11 +21,9 @@ storiesOf('Button')
             <span>or this</span>
         </div>
     ))
-    .addWithSections('Global sections', (context, action) => {
-        return (
-            <Button onClick={action('global click')}>Simple</Button>
-        )
-    })
+    .addWithSections('Global sections', (context, action) => (
+        <Button onClick={action('global click')}>Simple</Button>
+    ))
     .addWithSections('Single section', () => (
         <Button>Simple</Button>
     ), ReactView)
@@ -49,7 +47,13 @@ storiesOf('Button')
                 </div>
             </div>
         </div>
-    ), Inline(Group(ReactView.withProps({peel: 3}), HtmlView.withProps({ peel: 3 }), CssView.withProps({specificity: 15})).withTitle('Test')))
+    ), Inline(
+        Group(
+            ReactView.withProps({ peel: 3 }),
+            HtmlView.withProps({ peel: 3 }),
+            CssView.withProps({ specificity: 15 })
+        ).withTitle('Test')
+    ))
     .addWithSections('Single collapsable section', () => (
         <Button>Simple</Button>
     ), Collapsable(ReactView))
@@ -91,12 +95,16 @@ storiesOf('Button')
         </div>
     ), Collapsable(Tabbable(ReactView, HtmlView).withTitle('Markup'), Tabbable(CssView).withTitle('Styling')))
     .addWithSections('Deep nesting again', () => (
-            <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
-                <Button>Simple</Button>
-            </div>
-        ), Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
+        <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
+            <Button>Simple</Button>
+        </div>
+        ),
+        /* eslint-disable max-len */
+        Collapsable(Collapsable(Collapsable(Collapsable(Inline(HtmlView.withTitle('Min html')).withTitle('Ingenting')).withTitle('I the middle'))).withTitle('top-level')),
         Collapsable(Tabbable(Collapsable(Tabbable(Inline(HtmlView).withTitle('My header')).withTitle('tabbable')).withTitle('collapsable'))),
-        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3')))
+        Tabbable(Tabbable(Tabbable(Tabbable(Inline(HtmlView.withTitle('content')).withTitle('tab0')).withTitle('tab1')).withTitle('tab2')).withTitle('tab3'))
+        /* eslint-enable max-len */
+    )
     .addWithSections('Pure grouping', () => (
         <div style={{ padding: '1rem', backgroundColor: '#efefef' }}>
             <Button>Simple</Button>

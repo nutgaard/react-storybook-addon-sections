@@ -12,8 +12,8 @@
     "js:build": "babel --ignore tests,stories --plugins \"transform-runtime\" ./src --out-dir ./dist",
     "html:build": "copyfiles -u 1 'src/**/*.css' dist/",
     "build": "yarn run js:build && yarn run html:build",
-    "lint": "eslint src",
-    "lintfix": "eslint src --fix",
+    "lint": "eslint src example",
+    "lintfix": "eslint src example --fix",
     "testonly": "exit 0",
     "test": "yarn run lint && yarn run testonly",
     "storybook": "start-storybook -p 9010",
@@ -55,8 +55,8 @@
     "react-highlight": "^0.9.0",
     "react-motion": "^0.4.7",
     "rimraf": "^2.6.1",
-    "sinon": "^1.17.6",
-    "style-loader": "^0.13.1"
+    "sinon": "^2.1.0",
+    "style-loader": "^0.16.1"
   },
   "peerDependencies": {
     "@kadira/storybook": "^2.20.1",
@@ -75,6 +75,7 @@
     "npm": "^3.0.0"
   },
   "dependencies": {
+    "babel-eslint": "^7.2.1",
     "gh-pages": "^0.12.0",
     "specificity": "^0.3.0"
   }

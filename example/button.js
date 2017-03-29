@@ -12,7 +12,9 @@ class Button extends Component {
     handleClick(event) {
         this.setState({ click: this.state.click + 1 });
 
-        this.props.onClick && this.props.onClick(event);
+        if (this.props.onClick) {
+            this.props.onClick(event);
+        }
     }
 
     render() {
