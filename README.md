@@ -2,6 +2,8 @@
 
 A React Storybook addon to show additional information for your stories.
 
+[DEMO](http://www.utgaard.xyz/react-storybook-addon-sections)
+
 ## Usage
 
 Install the following npm module:
