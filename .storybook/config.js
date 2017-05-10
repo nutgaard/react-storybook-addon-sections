@@ -7,5 +7,6 @@ setAddon(InfoAddon);
 setDefaultSections(Htmlview);
 
 configure(() => {
+    require('../example/css_story');
     require('../example/story');
 }, module);

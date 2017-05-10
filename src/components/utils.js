@@ -9,45 +9,82 @@ export function classNames(...cls) {
         .map((cl) => `${clsBase}__${cl}`).join(' ');
 }
 
-function calculateSpecificity(selector, minThreshold) {
-    return !!specificity.calculate(selector)
-        .map((r) => parseInt(r.specificity.replace(/,/g, ''), 10))
-        .find((r) => r >= minThreshold);
+function groupBy(key, defaultKeyvalue) {
+    return (acc, el) => {
+        const groupKey = el[key] || defaultKeyvalue;
+        const group = acc[groupKey] || [];
+        group.push(el);
+        acc[groupKey] = group;
+        return acc;
+    };
 }
 
-export function getCssRulesForElement(element, minThreshold) {
-    const sheets = document.styleSheets;
-    const elementrules = [];
+function calculateSpecificity(minThreshold) {
+    return (rule) => {
+        const selector = rule.rule.selectorText;
+        return selector && !!specificity.calculate(selector)
+                .map((r) => parseInt(r.specificity.replace(/,/g, ''), 10))
+                .find((r) => r >= minThreshold);
+    };
+}
 
-    // eslint-disable-next-line no-param-reassign
-    element.matches = element.matches ||
-        element.webkitMatchesSelector ||
-        element.mozMatchesSelector ||
-        element.msMatchesSelector ||
-        element.oMatchesSelector;
+function inversionOfCSSRules(rule, extraProps) {
+    if (rule.type === CSSRule.STYLE_RULE) {
+        return [{ rule, ...extraProps }];
+    } else {
+        return Array.from(rule.cssRules)
+            .map((childRule) => inversionOfCSSRules(childRule, { media: rule.conditionText, parentRule: rule }))
+            .reduce((accRules, rules) => [...accRules, ...rules], []);
+    }
+}
 
-    Array.from(sheets).forEach((sheet) => {
-        const rules = sheet.rules || sheet.cssRules;
-        Array.from(rules)
-            .filter((rule) => calculateSpecificity(rule.selectorText, minThreshold))
-            .forEach((rule) => {
-                if (element.matches(rule.selectorText)) {
-                    elementrules.push(rule.cssText);
-                }
-            });
-    });
+function getRules() {
+    return Array.from(document.styleSheets)
+        .map((sheet) => Array.from(sheet.rules || sheet.cssRules))
+        .reduce((accRules, rules) => [...accRules, ...rules], [])
+        .filter((rule) => rule.type === CSSRule.STYLE_RULE || rule.type === CSSRule.MEDIA_RULE)
+        .map(inversionOfCSSRules)
+        .reduce((accRules, rules) => [...accRules, ...rules], []);
+}
 
-    return elementrules;
+
+function matches(elements) {
+    const body = document.body;
+    const matches = body.matches ||
+        body.webkitMatchesSelector ||
+        body.mozMatchesSelector ||
+        body.msMatchesSelector ||
+        body.oMatchesSelector;
+
+
+    return (rule) => elements.find((element) => matches.call(element, rule.rule.selectorText));
+    //return (rule) => elements.find((element) => element.matches(rule.rule.selectorText));
 }
 
 export function getCssRulesForElementDeep(element, minThreshold) {
+    console.group('css');
+    console.time('whole');
     const set = new Set();
-    getCssRulesForElement(element, minThreshold)
-        .forEach((rule) => set.add(rule));
+    console.time('elements');
+    const elements = [element, ...Array.from(element.querySelectorAll('*'))];
+    console.timeEnd('elements');
+    console.time('rules');
+    const cssRules = getRules()
+        .filter(calculateSpecificity(minThreshold))
+        .filter(matches(elements))
+        .reduce(groupBy('media', 'global'), {});
+    console.timeEnd('rules');
 
-    Array.from(element.querySelectorAll('*'))
-        .map((e) => getCssRulesForElement(e, minThreshold))
-        .forEach((rules) => rules.forEach((rule) => set.add(rule)));
+    const { global, ...mediaQueries } = cssRules;
 
+
+    global.forEach((ruleDesc) => {
+        set.add(ruleDesc.rule.cssText);
+    });
+    Object.entries(mediaQueries).forEach(([mediaQuery, rules]) => {
+        set.add(`@media ${mediaQuery} { ${rules.map((ruleDesc) => ruleDesc.rule.cssText).join('') } }`);
+    });
+    console.timeEnd('whole');
+    console.groupEnd('css');
     return Array.from(set);
 }

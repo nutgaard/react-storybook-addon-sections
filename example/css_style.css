@@ -1,0 +1,24 @@
+.basic {
+    background-color: #f1f1f1;
+}
+
+.basic h1 {
+    font-family: -apple-system, sans-serif;
+    color: #333;
+}
+
+@media (min-width: 25rem){
+    .basic {
+        background-color: aliceblue;
+    }
+
+    .basic h1 {
+        color: rosybrown;
+    }
+}
+
+@font-face {
+    font-family: "CustomFontFace";
+    font-weight: 900;
+    font-style: oblique;
+}
