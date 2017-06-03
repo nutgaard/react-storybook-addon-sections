@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, setAddon, addDecorator } from '@kadira/storybook';
+import { configure, setAddon } from '@storybook/react';
 import InfoAddon, { setDefaultSections } from '../src/';
 import { Htmlview } from '../src/';
 

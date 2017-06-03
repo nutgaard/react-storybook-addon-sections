@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import Button from './button';
 import Inline from '../src/components/groupings/inline';
 import Collapsable from '../src/components/groupings/collapsable';

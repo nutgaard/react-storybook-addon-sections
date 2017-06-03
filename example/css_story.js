@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import Inline from '../src/components/groupings/inline';
 import CssView from '../src/components/sections/cssview';
 import './css_style.css';
