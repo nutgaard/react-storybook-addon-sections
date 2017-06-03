@@ -1,4 +1,5 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
+import { default as PT } from 'prop-types';
 import { factory } from './utils';
 import { classNames } from './../utils';
 

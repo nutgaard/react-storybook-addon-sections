@@ -1,5 +1,6 @@
 import { render } from 'react-dom';
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component } from 'react';
+import { default as PT } from 'prop-types';
 import { clsBase, classNames } from './utils';
 import './sectioned-story.css';
 

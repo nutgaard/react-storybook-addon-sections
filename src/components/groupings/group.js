@@ -1,4 +1,4 @@
-import { PropTypes as PT } from 'react';
+import { default as PT } from 'prop-types';
 import { factory } from './utils';
 
 function Group({ children }) {

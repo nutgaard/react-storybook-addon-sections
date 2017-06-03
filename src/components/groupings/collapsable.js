@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component } from 'react';
+import { default as PT } from 'prop-types';
 import Collapse from 'react-collapse';
 import './collapsable.css';
 import { factory } from './utils';
