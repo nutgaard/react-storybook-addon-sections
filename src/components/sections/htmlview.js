@@ -1,5 +1,6 @@
 /* eslint-env browser */
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
+import { default as PT } from 'prop-types';
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/github.css';
 import titleHoc from './../title-hoc';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { action } from '@kadira/storybook';
+import { action } from '@storybook/react';
 import _SectionedStory from './components/sectioned-story';
 import _Htmlview from './components/sections/htmlview';
 

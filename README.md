@@ -16,7 +16,7 @@ Then set the addon in the place you configure storybook like this:
 
 ```js
 import React from 'react';
-import { configure, setAddon } from '@kadira/storybook';
+import { configure, setAddon } from '@storybook/react';
 import sectionsAddon from 'react-storybook-addon-sections';
 
 setAddon(sectionsAddon);
@@ -31,7 +31,7 @@ Then create your stories with the `.addWithSections` API.
 ```js
 import React from 'react';
 import Button from './Button';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 
 storiesOf('Button')
     .addWithSections('Global sections', () => (
