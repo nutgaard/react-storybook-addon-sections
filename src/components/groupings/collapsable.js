@@ -27,8 +27,10 @@ class Collapsable extends Component {
         return (
             <div className={classNames('section', 'collapsable')}>
                 <button className={classNames('collapsable__btn')} onClick={this.handleClick}>
-                    <h2 className={classNames('collapsable__btntitle')}>{title}</h2>
-                    <span className={classNames('collapsable__btnicon')}>{openBtn}</span>
+                    <div className={classNames('collapsable__flex-wrapper')}>
+                        <h2 className={classNames('collapsable__btntitle')}>{title}</h2>
+                        <span className={classNames('collapsable__btnicon')}>{openBtn}</span>
+                    </div>
                 </button>
                 <Collapse isOpened={this.state.open}>
                     <div className={classNames('collapsable__content')}>

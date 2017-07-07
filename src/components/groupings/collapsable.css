@@ -8,10 +8,12 @@
 .storybook-addons-sections__collapsable__btn {
     background: none;
     border: none;
+    padding: 1rem;
+}
+.storybook-addons-sections__collapsable__flex-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
 }
 .storybook-addons-sections__collapsable__btntitle {
     margin: 0;
